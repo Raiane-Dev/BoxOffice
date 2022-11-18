@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  backend:
+    container_name: back
+    build:
+      context: ./backend
+      dockerfile: dockerfile
+    env_file: ./backend/.env
+    restart: always
+    ports:
+      - 3000:3000
+    tty: true
+    command: yarn prod
+
+  frontend:
+    container_name: front
+    build:
+      context: ./frontend
+      dockerfile: dockerfile
+    env_file: ./frontend/.env
+    restart: always
+    ports:
+      - 5000:5000
+    tty: true
+    command: ["nginx", "-g", "daemon off;"]
